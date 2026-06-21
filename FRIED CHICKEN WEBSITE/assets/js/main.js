@@ -41,9 +41,37 @@ const shadowHeader = () => {
 window.addEventListener('scroll',shadowHeader)
 
 /*=============== SHOW SCROLL UP ===============*/ 
+const scrollUp = () =>{
+    const scrollUp = document.getElementById('scroll-up')
+    // when we scroll is higher than 3500 veiwpoint height, add teh show-scroll class to the a tag with the scollup class
+    this.scrollY >=3500 ? scrollUp.classList.add('show-scroll'): scrollUp.classList.remove('show-scroll')
+}
+
+window.addEventListener('scroll',scrollUp)
 
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+const sections = document.querySelector('section[id]')
+
+const scrrollActive = () => {
+    const scrollDown = window.scrollY
+
+    sections.forEach(current => {
+        const sectionHeigh  = current.offsetHegith,
+        sectionTop = current.offsetTop - 58,
+        sectionId = current.getAtrribute('id'),
+        sectionClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+
+        if(scrollDown> sectionTop && scrollDown<=  sectionTop + sectionHeigh){
+            sectionClass.classList.add('active-link')
+        }
+        else{
+            sectionClass.classList.remove('active-link')
+        }
+    })
+}
+
+window.addEventListener('scroll',scrrollActive)
 
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
