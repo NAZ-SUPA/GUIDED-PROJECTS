@@ -1,19 +1,33 @@
-/* Googel Fonts */
+/* Google Fonts
+   Imports the two font families used throughout the site:
+   - Montserrat Alternates: the main readable body/interface font.
+   - Unbounded: the heavier display font used for headings and brand-style text.
+*/
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&family=Unbounded:wght@700&display=swap");
 
+/* Root design tokens
+   These custom properties centralize the main design decisions for the whole
+   website. Colors, font sizes, font weights, spacing constants, reusable image
+   shadow effects, and z-index layers are defined here so the rest of the CSS can
+   reuse consistent values instead of repeating hard-coded numbers.
+*/
 :root {
+  /* Fixed header height used by the navigation layout. */
   --header-height: 3.5rem;
+
   /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
+  /* Color mode: HSL(hue, saturation, lightness). */
   --first-color: hsl(30, 100%, 58%);
   --black-color: hsl(220, 12%, 8%);
   --white-color: hsl(48, 90%, 90%);
   --text-color: hsl(220, 8%, 28%);
   --body-color: hsl(48, 80%, 90%);
+
+  /* Shared drop shadow used on food/product images to lift them off the page. */
   --shadow-img: drop-shadow(0 16px 24px hsla(0, 0%, 0%, 0.2));
 
   /*========== Font and typography ==========*/
-  /*.5rem = 8px | 1rem = 16px ...*/
+  /* .5rem = 8px | 1rem = 16px. Using rem keeps typography scalable. */
   --body-font: "Montserrat Alternates", sans-serif;
   --second-font: "Unbounded", sans-serif;
   --biggest-font-size: 3rem;
@@ -31,10 +45,16 @@
   --font-bold: 700;
 
   /*========== z index ==========*/
+  /* z-tooltip sits above content; z-fixed is reserved for fixed UI like header. */
   --z-tooltip: 10;
   --z-fixed: 100;
 }
-/*========== Responsive typography ==========*/
+
+/* Responsive typography
+   On wide screens, the same variables are increased. Because the rest of the
+   stylesheet uses these variables, the page scales up without rewriting every
+   individual heading and text rule.
+*/
 @media screen and (min-width: 1150px) {
   :root {
     --biggest-font-size: 6rem;
@@ -49,16 +69,22 @@
 }
 
 /*=============== BASE ===============*/
+/* Universal reset
+   Makes element sizing predictable and removes browser default spacing so each
+   section starts from the same baseline across browsers.
+*/
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+/* Enables smooth movement when clicking anchor links such as #about or #order. */
 html {
   scroll-behavior: smooth;
 }
 
+/* Applies the main font and default text size to normal page text and controls. */
 body,
 input,
 button {
@@ -66,17 +92,20 @@ button {
   font-size: var(--normal-font-size);
 }
 
+/* Main page colors. The body uses the cream background and dark foreground. */
 body {
   background-color: var(--body-color);
   color: var(--black-color);
 }
 
+/* Removes default form control borders/outlines so custom button/input styles show cleanly. */
 input,
 button {
   border: none;
   outline: none;
 }
 
+/* Shared heading style: display font, bold weight, and title color variable. */
 h1,
 h2,
 h3,
@@ -86,14 +115,17 @@ h4 {
   font-family: var(--second-font);
 }
 
+/* Removes bullets from navigation and footer/social lists. */
 ul {
   list-style: none;
 }
 
+/* Removes default underlines from all links; hover states are defined per component. */
 a {
   text-decoration: none;
 }
 
+/* Makes images responsive and removes inline-image baseline spacing. */
 img {
   display: block;
   max-width: 100%;
@@ -101,43 +133,56 @@ img {
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
+/* Page-width wrapper.
+   The max width prevents sections from becoming too wide, while margin-inline
+   keeps side spacing on mobile.
+*/
 .container {
   max-width: 1120px;
   margin-inline: 1.5rem;
 }
 
+/* Generic grid utility used by several sections for vertical spacing. */
 .grid {
   display: grid;
   gap: 1.5rem;
 }
 
+/* Standard section spacing: more room above each section than below. */
 .section {
   padding-block: 5rem 1rem;
 }
 
+/* Shared section title/subtitle alignment and heading font. */
 .section__title,
 .section__subtitle {
   text-align: center;
   font-family: var(--second-font);
 }
 
+/* Main section heading size and bottom spacing. */
 .section__title {
   font-size: var(--big-font-size);
   margin-bottom: 1rem;
 }
 
+/* Smaller label above some section titles, displayed as its own line. */
 .section__subtitle {
   display: block;
   font-size: var(--h2-font-size);
   margin-bottom: 0.25rem;
 }
 
+/* Hides horizontal overflow caused by large decorative images positioned off-canvas. */
 .main {
   overflow: hidden;
 }
 
 /*=============== HEADER & NAV ===============*/
-
+/* Fixed top header.
+   It stays visible while scrolling and uses the strongest z-index layer so it
+   remains above section images and content.
+*/
 .header {
   position: fixed;
   width: 100%;
@@ -148,6 +193,10 @@ img {
   transition: box-shadow 0.4s;
 }
 
+/* Navigation bar layout.
+   Flexbox separates the logo from the menu/toggle controls inside the fixed
+   header height.
+*/
 .nav {
   position: relative;
   height: var(--header-height);
@@ -156,21 +205,25 @@ img {
   align-items: center;
 }
 
+/* Logo link: image and text are aligned side by side. */
 .nav__logo {
   display: inline-flex;
   align-items: center;
   column-gap: 0.25rme;
 }
 
+/* Small logo image size inside the header. */
 .nav__logo img {
   width: 1.5rem;
 }
 
+/* Logo text uses the dark brand color and semi-bold weight. */
 .nav__logo span {
   color: var(--black-color);
   font-weight: var(--font-semi-bold);
 }
 
+/* Mobile open/close icon buttons share the same size and pointer behavior. */
 .nav__toggle,
 .nav__close {
   display: inline-flex;
@@ -178,8 +231,10 @@ img {
   cursor: pointer;
 }
 
-/* Navigation for mobile devices */
-
+/* Navigation for mobile devices
+   Below 1150px, the menu becomes a fixed side drawer. It starts off-screen on
+   the right and slides in when the JavaScript adds .show-menu.
+*/
 @media screen and (max-width: 1150px) {
   .nav__menu {
     position: fixed;
@@ -194,65 +249,89 @@ img {
   }
 }
 
+/* Vertical mobile navigation list with generous spacing between links. */
 .nav__list {
   display: flex;
   flex-direction: column;
   row-gap: 3.5rem;
 }
 
+/* Navigation links use the display font and animate color on hover. */
 .nav__link {
   color: var(--black-color);
   font-family: var(--second-font);
   transition: color 0.4s;
 }
 
+/* Hover state highlights links with the light cream color. */
 .nav__link:hover {
   color: var(--white-color);
 }
 
+/* Close icon position inside the mobile drawer. */
 .nav__close {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
 }
 
-/* Show menu */
-
+/* Show menu
+   JavaScript adds this class to .nav__menu so the drawer moves from right:-100%
+   to right:0 and becomes visible.
+*/
 .show-menu {
   right: 0;
 }
 
-/* Add shadow header */
+/* Add shadow header
+   JavaScript adds this class after scrolling to visually separate the fixed
+   header from page content.
+*/
 .shadow-header {
   box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.1);
 }
 
-/* Active link */
+/* Active link
+   Marks the navigation item for the section currently in view. */
 .active-link {
   color: var(--white-color);
 }
+
 /*=============== HOME ===============*/
+/* Hero section background uses the primary orange brand color. */
 .home {
   background-color: var(--first-color);
 }
+
+/* Hero container spacing and grid row separation for text and image blocks. */
 .home__container {
   padding-block: 4rem 1rem;
   row-gap: 3rem;
 }
+
+/* Text column is positioned relative so decorative chicken pieces can be absolutely placed inside it. */
 .home__data {
   position: relative;
   text-align: center;
 }
+
+/* Main hero title with compact bottom spacing before the description. */
 .home__title {
   font-size: var(--big-font-size);
   margin-bottom: 0.5rem;
 }
+
+/* Highlighted words in the hero title use the light cream color. */
 .home__title span {
   color: var(--white-color);
 }
+
+/* Description spacing before the call-to-action button. */
 .home__description {
   margin-bottom: 2rem;
 }
+
+/* All decorative chicken crumb/splash images in the hero are positioned absolutely. */
 .home__dam-1,
 .home__dam-2,
 .home__dam-3,
@@ -260,39 +339,58 @@ img {
 .home__dam-5 {
   position: absolute;
 }
+
+/* Decorative image near the right side of the hero text. */
 .home__dam-1 {
   width: 60px;
   top: 4.5rem;
   right: -1.5rem;
 }
+
+/* Decorative image near the upper-left side of the hero text. */
 .home__dam-2 {
   width: 80px;
   top: -3.5rem;
   left: -2.5rem;
 }
+
+/* Image wrapper is relative so the decorative images can be anchored around the product image. */
 .home__images {
   position: relative;
   justify-self: center;
 }
+
+/* Main fried chicken hero image with reusable shadow. */
 .home__image {
   width: 280px;
   filter: var(--shadow-img);
 }
+
+/* Decorative image above the product image. */
 .home__dam-3 {
   width: 60px;
   top: -2rem;
   right: -1rem;
 }
+
+/* Decorative image near the lower-right side of the product image. */
 .home__dam-4 {
   width: 60px;
   right: 0.75rem;
   bottom: -1.25rem;
 }
+
+/* Decorative image near the left side of the product image. */
 .home__dam-5 {
   width: 80px;
   top: 5rem;
   left: -2.5rem;
 }
+
+/*=============== BUTTON ===============*/
+/* Shared button style used by hero/about links and footer subscribe button.
+   inline-flex lets button contents align neatly while still sizing to content.
+*/
 .button {
   display: inline-flex;
   background-color: var(--black-color);
@@ -302,40 +400,55 @@ img {
   border-radius: 0.75rem;
   transition: boxshadwo 0.4s;
 }
+
+/* Button hover state adds depth with a soft shadow. */
 .button:hover {
   box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.2);
 }
 
-/*=============== BUTTON ===============*/
-
 /*=============== ABOUT ===============*/
+/* About section continues the orange brand background from the hero. */
 .about {
   background-color: var(--first-color);
 }
+
+/* About layout spacing; the large row gap separates text and overlapping images on mobile. */
 .about__container {
   padding-bottom: 3rem;
   row-gap: 9rem;
 }
+
+/* Centers about copy and call-to-action. */
 .about__data {
   text-align: center;
 }
+
+/* Subtitle is cream on the orange background for contrast. */
 .about__data .section__subtitle {
   color: var(--white-color);
 }
+
+/* Space between about paragraph and button. */
 .about__description {
   margin-bottom: 2rem;
 }
+
+/* Image group uses relative positioning so secondary images and labels can overlap the main image. */
 .about__images {
   position: relative;
   justify-self: center;
   margin-right: 2rem;
 }
+
+/* Primary about food image, layered above the second image. */
 .about_image-1 {
   width: 280px;
   position: relative;
   z-index: 10;
   filter: var(--shadow-img);
 }
+
+/* Secondary about image, offset above and to the right for a stacked composition. */
 .about_image-2 {
   width: 210px;
   position: absolute;
@@ -343,6 +456,8 @@ img {
   right: -2rem;
   filter: var(--shadow-img);
 }
+
+/* Shared tooltip label styling for the about image annotations. */
 .about__tooltip-1,
 .about__tooltip-2 {
   position: absolute;
@@ -351,11 +466,15 @@ img {
   border-radius: 0.75rem;
   font-weight: var(--font-semi-bold);
 }
+
+/* Light tooltip above/left of the about image group. */
 .about__tooltip-1 {
   background-color: var(--white-color);
   top: -4rem;
   left: 0;
 }
+
+/* Dark tooltip near the lower-right of the about image group. */
 .about__tooltip-2 {
   background-color: var(--black-color);
   color: var(--white-color);
@@ -363,6 +482,11 @@ img {
   bottom: 3rem;
   z-index: 10;
 }
+
+/* Tooltip arrows.
+   The pseudo-elements are small rotated squares that visually connect the label
+   bubbles to the images.
+*/
 .about__tooltip-1::after,
 .about__tooltip-2::after {
   content: "";
@@ -376,35 +500,44 @@ img {
   border-radius: 0.25rem;
   background-color: red;
 }
+
+/* Arrow color and position for the light tooltip. */
 .about__tooltip-1::after {
   right: -8px;
   background-color: var(--white-color);
 }
+
+/* Arrow color and position for the dark tooltip. */
 .about__tooltip-2::after {
   left: -8px;
   background-color: var(--black-color);
 }
 
 /*=============== ORDER ===============*/
+/* Highlights one word in the order section title with the brand orange. */
 .order .section__title span {
   color: var(--first-color);
 }
 
+/* Vertical spacing around the order cards. */
 .order__container {
   padding-block: 1.5rem 3rem;
 }
 
+/* Each order item is a small composition of image, background shape, and price tooltip. */
 .order__card {
   position: relative;
   display: grid;
 }
 
+/* First product image size and layer. */
 .order__image-1 {
   width: 190px;
   filter: drop-shadow(var(--shadow-img));
   z-index: 1;
 }
 
+/* Second product image is larger and aligned to the right. */
 .order__image-2 {
   width: 250px;
   justify-self: flex-end;
@@ -412,6 +545,7 @@ img {
   z-index: 1;
 }
 
+/* Orange rounded blocks behind the food images. They create a colored backdrop. */
 .order__shape-1,
 .order__shape-2 {
   background-color: var(--first-color);
@@ -420,18 +554,21 @@ img {
   position: absolute;
 }
 
+/* Backdrop shape for the first order card. */
 .order__shape-1 {
   width: 180px;
   height: 100px;
   left: -3rem;
 }
 
+/* Backdrop shape for the second order card. */
 .order__shape-2 {
   width: 180px;
   height: 140px;
   right: -3rem;
 }
 
+/* Shared pricing bubble styles for order cards. */
 .order__tooltip-1,
 .order__tooltip-2 {
   position: absolute;
@@ -441,16 +578,19 @@ img {
   z-index: 5;
 }
 
+/* Price bubble for the first order card, placed on the right. */
 .order__tooltip-1 {
   right: 0;
   padding: 0.75rem 2rem 0.75rem 0.75rem;
 }
 
+/* Price bubble for the second order card, placed on the left. */
 .order__tooltip-2 {
   left: 13px;
   padding: 0.75rem 0.75rem 0.75rem 2rem;
 }
 
+/* Rotated-square arrows for order price bubbles. */
 .order__tooltip-1::after,
 .order__tooltip-2::after {
   content: "";
@@ -466,29 +606,35 @@ img {
   z-index: -1;
 }
 
+/* Arrow on the left side of the first tooltip. */
 .order__tooltip-1::after {
   left: -8px;
 }
 
+/* Arrow on the right side of the second tooltip. */
 .order__tooltip-2::after {
   right: -8px;
 }
 
+/* Product name text inside an order tooltip. */
 .order__title {
   font-size: var(--normal-font-size);
   color: var(--white-color);
 }
 
+/* Product category text inside an order tooltip. */
 .order__subtitle {
   display: inline-block;
   font-size: var(--small-font-size);
   margin-bottom: 1.25rem;
 }
 
+/* Price text inside an order tooltip. */
 .order__price {
   font-size: var(--h2-font-size);
 }
 
+/* Shopping bag button inside each tooltip. */
 .order__button {
   width: 32px;
   height: 32px;
@@ -503,24 +649,30 @@ img {
   bottom: 0.75rem;
   cursor: pointer;
 }
+
 /*=============== COMBO ===============*/
+/* Combo section background returns to the orange brand color. */
 .combo {
   background-color: var(--first-color);
 }
 
+/* Highlighted combo title text is cream for contrast on orange. */
 .combo .section__title span {
   color: var(--white-color);
 }
 
+/* Extra bottom padding leaves room for the price/info panel that sits below the image. */
 .combo__container {
   padding-block: 4rem 9rem;
 }
 
+/* Relative grid wrapper that holds the central combo image, numbers, repeated text, and price block. */
 .combo__content {
   position: relative;
   display: grid;
 }
 
+/* Main combo product image, centered and layered above the repeated background title. */
 .combo__img {
   width: 320px;
   justify-self: center;
@@ -528,6 +680,7 @@ img {
   z-index: 5;
 }
 
+/* Number markers above the combo image. */
 .combo__numbers {
   position: absolute;
   top: -3rem;
@@ -536,21 +689,25 @@ img {
   column-gap: 4rem;
 }
 
+/* Individual number/arrow marker layout. */
 .combo__number {
   display: grid;
   row-gap: 0.25rem;
   text-align: center;
 }
 
+/* Number text uses the display font. */
 .combo__number span {
   font-size: var(--h3-font-size);
   font-family: var(--second-font);
 }
 
+/* Arrow icon size below each number. */
 .combo__number i {
   font-size: 1.25rem;
 }
 
+/* Large repeated COMBO word used as a background typographic effect. */
 .combo__title {
   font-size: var(--biggest-font-size);
   color: var(--white-color);
@@ -558,12 +715,14 @@ img {
   letter-spacing: 10px;
 }
 
+/* Positions the repeated combo titles behind the image. */
 .combo__titles {
   position: absolute;
   top: 0;
   justify-self: center;
 }
 
+/* Bottom price/info group overlays the lower part of the combo composition. */
 .combo__data {
   position: absolute;
   bottom: -3.5rem;
@@ -573,6 +732,7 @@ img {
   justify-self: center;
 }
 
+/* Light information label attached to the price block. */
 .combo__info {
   background-color: var(--white-color);
   padding: 0.75rem;
@@ -580,10 +740,12 @@ img {
   font: var(--small-font-sisze);
 }
 
+/* Bold quantity text inside the combo info label. */
 .combo__info b {
   font-family: var(--second-font);
 }
 
+/* Dark price block for the combo offer. */
 .combo__price {
   background-color: var(--black-color);
   color: var(--first-color);
@@ -592,44 +754,53 @@ img {
   font: var(--h1-font-size);
   font-family: var(--second-font);
 }
+
 /*=============== CONTACT ===============*/
+/* Contact section grid spacing and centered content. */
 .contact__container {
   padding-block: 4rem 3rem;
   row-gap: 3rem;
   justify-content: center;
 }
 
+/* Relative wrapper for the large contact heading and surrounding decorative images. */
 .contact__data {
   position: relative;
 }
 
+/* Main contact heading size. */
 .contact__title {
   font-size: var(--bigger-font-size);
 }
 
+/* The word "FLAVOR" is oversized and highlighted in orange. */
 .contact__title span {
   font-size: var(--biggest-font-size);
   color: var(--first-color);
 }
 
+/* Main contact food images are absolutely positioned around the heading. */
 .contact__img-1,
 .contact__img-2 {
   position: absolute;
   filter: drop-shadow(var(--shadow-img));
 }
 
+/* Larger contact image near the upper-right of the title. */
 .contact__img-1 {
   width: 110px;
   top: 1.5rem;
   right: -3rem;
 }
 
+/* Smaller contact image placed farther right for depth. */
 .contact__img-2 {
   width: 90px;
   top: 3rem;
   right: -6rem;
 }
 
+/* Decorative chicken pieces around the contact heading. */
 .contact__dam-1,
 .contact__dam-2,
 .contact__dam-3,
@@ -637,70 +808,85 @@ img {
   position: absolute;
 }
 
+/* Top-right decorative piece. */
 .contact__dam-1 {
   width: 60px;
   top: -4rem;
   right: 1rem;
 }
 
+/* Lower-right decorative piece. */
 .contact__dam-2 {
   width: 80px;
   right: -2rem;
   bottom: -6rem;
 }
 
+/* Lower-left decorative piece. */
 .contact__dam-3 {
   width: 60px;
   left: 0;
   bottom: -4rem;
 }
 
+/* Upper-left decorative piece. */
 .contact__dam-4 {
   width: 80px;
   top: -6rem;
   left: -2rem;
 }
 
+/* Centers the contact details below the contact title/image composition. */
 .contact__info {
   text-align: center;
 }
 
+/* Contact detail headings such as Delivery, Location, and Attention. */
 .contact__subtitle {
   font-size: var(--h3-font-size);
   margin-bottom: 0.75rem;
 }
 
+/* Horizontal row for social/contact icons. */
 .contact__social {
   display: flex;
   justify-content: center;
   column-gap: 1rem;
 }
 
+/* Social/contact icon links use orange and animate on hover. */
 .contact__social-link {
   font-size: 1.5rem;
   color: var(--first-color);
   transition: transform 0.4s;
 }
 
+/* Moves social icons slightly upward on hover for feedback. */
 .contact__social-link:hover {
   transform: translateY(-0.25rem);
 }
 
+/* Address text uses muted color but remains semi-bold for readability. */
 .contact__address {
   color: var(--text-color);
   font-style: initial;
   font-weight: var(--font-semi-bold);
 }
+
 /*=============== FOOTER ===============*/
+/* Footer background and vertical spacing. */
 .footer {
   background-color: var(--first-color);
   padding-block: 3rem 2rem;
 }
+
+/* Shared grid row spacing for footer wrapper and footer content blocks. */
 .footer__container,
 .footer__content {
   row-gap: 3rem;
 }
 
+/* Footer logo is centered and aligns icon/text horizontally. */
 .footer__logo {
   display: flex;
   align-items: center;
@@ -708,15 +894,18 @@ img {
   column-gap: 0.25rem;
 }
 
+/* Footer logo image size. */
 .footer__logo img {
   width: 1.5rem;
 }
 
+/* Footer logo text styling. */
 .footer__logo span {
   color: var(--black-color);
   font-weight: var(--font-semi-bold);
 }
 
+/* Shared flex layout for footer social links, payment cards, and subscribe form. */
 .footer__social,
 .footer__pay,
 .footer__form {
@@ -725,36 +914,43 @@ img {
   column-gap: 1rem;
 }
 
+/* Footer column heading style. */
 .footer__title {
   font-size: var(--h3-font-size);
   margin-bottom: 0.75rem;
   text-align: center;
 }
 
+/* Footer social row sizing and hover transition. */
 .footer__social {
   font-size: 1.5rem;
   color: var(--black-color);
   transition: transform 0.4s;
 }
 
+/* Social icons remain dark against the orange footer. */
 .footer__social i {
   color: var(--black-color);
 }
 
+/* Social links move upward on hover for a lightweight interaction. */
 .footer__social-link:hover {
   transform: translateY(-0.25rem);
 }
 
+/* Payment method card thumbnails. */
 .footer__pay-card {
   width: 30px;
 }
 
+/* Subscribe form uses a light background so the email input is distinct from the footer. */
 .footer__form {
   background-color: var(--white-color);
   padding: 0.5rem;
   border-radius: 1rem;
 }
 
+/* Email input fills the form width and keeps the form background visible. */
 .footer__input {
   width: 100%;
   background-color: transparent;
@@ -762,34 +958,48 @@ img {
   color: var(--black-color);
 }
 
+/* Placeholder styling hook for the email input. */
 .footer__input::placeholder {
   counter-reset: var(--black-color);
 }
 
+/* Subscribe button spacing and cursor behavior. */
 .footer__button {
   padding: 1rem 1.5rem;
   border-radius: 1rem;
   cursor: pointer;
 }
 
+/* Copyright line at the bottom of the footer. */
 .footer__copy {
   display: block;
   margin-top: 6rem;
   text-align: center;
   font-size: var(--small-font-sisze);
 }
+
 /*=============== SCROLL BAR ===============*/
+/* Custom WebKit scrollbar track color for Chrome, Edge, and Safari. */
 ::-webkit-scrollbar {
   width: 0.6rem;
   background-color: hsl(30, 32%, 70%);
 }
+
+/* Scrollbar thumb default color. */
 ::-webkit-scrollbar-thumb {
   background-color: hsl(30, 32%, 60%);
 }
+
+/* Scrollbar thumb hover color. */
 ::-webkit-scrollbar-thumb:hover {
   background-color: hsl(30, 32%, 50%);
 }
+
 /*=============== SCROLL UP ===============*/
+/* Back-to-top button.
+   It is fixed near the bottom-right of the viewport, but starts hidden below the
+   screen. JavaScript adds .show-scroll when the page is scrolled enough.
+*/
 .scrollup {
   position: fixed;
   right: 1rem;
@@ -807,16 +1017,30 @@ img {
     transform 0.4s;
 }
 
+/* Hover state lifts the scroll-up button slightly. */
 .scrollup:hover {
   transform: translateY(-0.5rem);
 }
-/* Show Scroll Up */
+
+/* Show Scroll Up
+   Moves the scroll-up button into view when JavaScript applies this class.
+*/
 .show-scroll {
   bottom: 3rem;
 }
+
 /*=============== BREAKPOINTS ===============*/
-/* For small devices */
+/* For small devices
+   Add mobile-specific overrides here when very narrow screens need adjusted
+   spacing, smaller images, or simplified layouts.
+*/
 
-/* For medium devices */
+/* For medium devices
+   Add tablet-specific overrides here when sections should move from one-column
+   mobile layouts toward wider multi-column layouts.
+*/
 
-/* For large devices */
+/* For large devices
+   Add desktop-specific overrides here for full navigation, wider containers,
+   larger image compositions, or refined section spacing.
+*/
