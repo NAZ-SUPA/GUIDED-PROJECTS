@@ -1,29 +1,57 @@
 <!doctype html>
+<!-- 
+  ================================
+  FRIED CHICKEN WEBSITE
+  ================================
+  A responsive restaurant website showcasing fried chicken menu items and services.
+  
+  STRUCTURE:
+  - Header: Navigation bar with logo and menu
+  - Main: Contains 5 main sections (Home, About, Order, Combo, Contact)
+  - Footer: Copyright, social links, payment methods, email subscription
+  
+  STYLING: BEM (Block Element Modifier) naming convention with CSS Grid & Flexbox
+  RESPONSIVE: Mobile-first approach with breakpoints for medium and large devices
+-->
 <html lang="en">
 
 <head>
+  <!-- Character encoding for proper text rendering -->
   <meta charset="UTF-8" />
+  <!-- Viewport settings for responsive mobile design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- FavIcon -->
+  
+  <!-- FavIcon - Small icon shown in browser tab -->
   <link rel="shortcut icon" href="assets/img/favicon.png" />
-  <!-- RemixIcon -->
+  
+  <!-- RemixIcon Library - For icons used throughout the site (hamburger, close, shopping bag, etc.) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
-  <!-- CSS -->
+  
+  <!-- Main CSS Stylesheet - Contains all layout, colors, typography, and animations -->
   <link rel="stylesheet" href="assets/css/style.css" />
+  
   <title>Fried Chicken</title>
 </head>
 
 <body>
-  <!--==================== HEADER ====================-->
+  <!-- ==================== HEADER: FIXED NAVIGATION BAR ==================== -->
+  <!-- 
+    Fixed header at top of page that remains visible while scrolling.
+    Contains: Logo, navigation menu, and mobile toggle button.
+    Interactions: Menu slides in/out on mobile, shadow appears on scroll.
+  -->
   <header class="header" id="header">
     <nav class="nav container">
+      <!-- LOGO: Brand identity with icon and text -->
       <a href="" class="nav__logo">
         <img src="assets/img/logo.svg" alt="image" />
         <span>Fried <br />
           Chicken</span>
       </a>
 
+      <!-- NAVIGATION MENU: Links to all page sections (shows/hides on mobile) -->
       <div class="nav__menu" id="nav-menu">
+        <!-- Navigation links list - scrolls to different sections -->
         <ul class="nav__list">
           <li>
             <a href="#home" class="nav__link active-link">HOME</a>
@@ -42,40 +70,57 @@
           </li>
         </ul>
 
-        <!-- Close Icon -->
+        <!-- CLOSE BUTTON: For mobile menu (X icon) -->
         <div class="nav__close" id="nav-close">
           <i class="ri-close-large-line"></i>
         </div>
       </div>
-      <!-- Toggle Button -->
+
+      <!-- HAMBURGER TOGGLE: Shows/hides mobile menu -->
       <div class="nav__toggle" id="nav-toggle">
         <i class="ri-apps-2-line"></i>
       </div>
     </nav>
   </header>
 
-  <!--==================== MAIN ====================-->
+  <!-- ==================== MAIN: PAGE CONTENT CONTAINER ==================== -->
+  <!-- Wraps all main page sections. Overflow hidden prevents scrolling issues. -->
   <main class="main">
-    <!--==================== HOME ====================-->
+
+    <!-- ==================== SECTION 1: HOME / HERO SECTION ==================== -->
+    <!-- 
+      Hero section that appears first after header.
+      Orange background with main headline, description, and call-to-action button.
+      Two-column layout: Left side (text), Right side (hero image with decorative elements)
+    -->
     <section class="home section" id="home">
       <div class="home__container container grid">
+        
+        <!-- LEFT COLUMN: Text content -->
         <div class="home__data">
+          <!-- Main headline with colored span text -->
           <h1 class="home__title">
             Crispy & <br />
             Tasty <span>Fried</span> <br />
             <span>Chicken</span>
           </h1>
+          <!-- Introductory description -->
           <p class="home__description">
             Come enjoy the best and crispiest fried chicken made with the best
             ingredients, one bite and you'll want more.
           </p>
+          <!-- Call-to-action button linking to About section -->
           <a href="#about" class="button">About Fried Chicken</a>
+          <!-- Decorative chicken graphics (positioned absolutely) -->
           <img src="assets/img/chicken-dam-1.png" alt="image" class="home__dam-1" />
           <img src="assets/img/chicken-dam-5.png" alt="image" class="home__dam-2" />
         </div>
-        <div class="home__images">
-          <img src="assets/img/home-img.png" alt="image" class="home__image" />
 
+        <!-- RIGHT COLUMN: Hero image with decorative overlays -->
+        <div class="home__images">
+          <!-- Main hero image (fried chicken plate) -->
+          <img src="assets/img/home-img.png" alt="image" class="home__image" />
+          <!-- Decorative graphic elements around the main image -->
           <img src="assets/img/chicken-dam-1.png" alt="image" class="home__dam-3" />
           <img src="assets/img/chicken-dam-2.png" alt="image" class="home__dam-4" />
           <img src="assets/img/chicken-dam-4.png" alt="image" class="home__dam-5" />
@@ -83,66 +128,107 @@
       </div>
     </section>
 
-    <!--==================== ABOUT ====================-->
+    <!-- ==================== SECTION 2: ABOUT ==================== -->
+    <!-- 
+      Company story section explaining the restaurant's history and values.
+      Orange background, two-column layout: Left (text), Right (images with tooltips)
+    -->
     <section class="about section" id="about">
       <div class="about__container container grid">
+        
+        <!-- LEFT COLUMN: Company story and value proposition -->
         <div class="about__data">
+          <!-- Subtitle above the main heading -->
           <span class="section__subtitle">You'll Want To Try </span>
+          <!-- Main section heading -->
           <h2 class="section__title">
             More Than <br />
             One Bite
           </h2>
+          <!-- Description of the restaurant and its heritage -->
           <p class="about__description">
             Our story begins with Grandma's recipe for the crispiest fried
             chicken. Selecting the finest ingredients and savoring it with
             your palate.
           </p>
+          <!-- Call-to-action button linking to Order section -->
           <a href="#order" class="button">Order Fried Chicken</a>
         </div>
+
+        <!-- RIGHT COLUMN: Images with floating tooltip labels -->
         <div class="about__images">
+          <!-- Main about image (primary chicken image) -->
           <img src="assets/img/about-img-1.png" alt="image" class="about__image-1" />
+          <!-- Secondary decorative image (positioned absolutely) -->
           <img src="assets/img/about-img-2.png" alt="image" class="about__image-2" />
+          <!-- Floating label 1: Top-left corner (white background) -->
           <span class="about__tooltip-1">Crispy & <br />
             Tasty</span>
+          <!-- Floating label 2: Bottom-right corner (dark background) -->
           <span class="about__tooltip-2">Best Recipe <br />
             Since 1990</span>
         </div>
       </div>
     </section>
 
-    <!--==================== ORDER ====================-->
-<section class="order section" id="order">
+    <!-- ==================== SECTION 3: ORDER / MENU PRODUCTS ==================== -->
+    <!-- 
+      Product showcase section displaying available menu items.
+      Features card-based layout with product images, descriptions, prices, and add-to-cart buttons.
+      Each card has an orange background shape and floating product info tooltip.
+    -->
+    <section class="order section" id="order">
+      <!-- Section heading -->
       <h2 class="section__title">
         The Tastiest <br />
         & <span>Most Bitten</span>
       </h2>
+
+      <!-- Container for product cards in a grid layout -->
       <div class="order__container container grid">
+
+        <!-- PRODUCT CARD 1: 1 Mini Bucket - $12 -->
         <article class="order__card">
+          <!-- Product image (fried chicken bucket) -->
           <img src="assets/img/order-img-1.png" alt="image" class="order__image-1" />
+          <!-- Decorative orange background shape behind the card -->
           <div class="order__shape-1"></div>
+          <!-- Product info tooltip (positioned absolutely, overlays the card) -->
           <div class="order__tooltip-1">
+            <!-- Product name -->
             <h3 class="order__title">
               1 Mini <br />
               Bucket
             </h3>
+            <!-- Product category/description -->
             <span class="order__subtitle">Fried chicken</span>
+            <!-- Price -->
             <h3 class="order__price">$12</h3>
+            <!-- Add to cart button with shopping bag icon -->
             <button class="order__button">
               <i class="ri-shopping-bag-4-fill"></i>
             </button>
           </div>
         </article>
 
+        <!-- PRODUCT CARD 2: 2 Mini Buckets - $20 -->
         <article class="order__card">
+          <!-- Product image (fried chicken bucket) -->
           <img src="assets/img/order-img-2.png" alt="image" class="order__image-2" />
+          <!-- Decorative orange background shape behind the card -->
           <div class="order__shape-2"></div>
+          <!-- Product info tooltip (positioned absolutely, overlays the card) -->
           <div class="order__tooltip-2">
+            <!-- Product name -->
             <h3 class="order__title">
               2 Mini <br />
               Bucket
             </h3>
+            <!-- Product category/description -->
             <span class="order__subtitle">Fried chicken</span>
+            <!-- Price -->
             <h3 class="order__price">$20</h3>
+            <!-- Add to cart button with shopping bag icon -->
             <button class="order__button">
               <i class="ri-shopping-bag-4-fill"></i>
             </button>
@@ -150,15 +236,24 @@
         </article>
       </div>
 
-    <!--==================== COMBO ====================-->
+    <!-- ==================== SECTION 4: COMBO / SPECIAL OFFERS ==================== -->
+    <!-- 
+      Special combo package section showcasing a premium deal.
+      Features animated scrolling text effect and combo details (quantity and price).
+    -->
     <section class="combo section" id="combo">
+      <!-- Section heading with highlighted color -->
       <h2 class="section__title">
         <span>Supreme</span><br>Combo
       </h2>
 
+      <!-- Combo package container -->
       <div class="combo__container container grid">
         <div class="combo__content">
+          <!-- Large product image for the combo package -->
           <img src="assets/img/combo-img.png" alt="image" class="combo__img">
+          
+          <!-- Numbered indicators with up arrows (shows combo includes multiple items) -->
           <div class="combo__numbers">
             <div class="combo__number">
               <span>1</span>
@@ -173,6 +268,8 @@
               <i class="ri-arrow-up-s-line"></i>
             </div>
           </div>
+
+          <!-- Animated text scrolling: "COMBO" repeats for marquee effect -->
           <div class="combo__titles">
             <h1 class="combo__title">COMBO</h1>
             <h1 class="combo__title">COMBO</h1>
@@ -180,66 +277,88 @@
             <h1 class="combo__title">COMBO</h1>
             <h1 class="combo__title">COMBO</h1>
           </div>
+
+          <!-- Combo details: What's included and price -->
           <div class="combo__data">
+            <!-- Description of what's in the combo -->
             <div class="combo__info"><b>1kg of</b> <br> fried chicken</div>
+            <!-- Price of the combo package -->
             <div class="combo__price">$32</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!--==================== CONTACT ====================-->
+    <!-- ==================== SECTION 5: CONTACT / CUSTOMER SERVICE ==================== -->
+    <!-- 
+      Contact and customer service information section.
+      Two-column layout: Left (tagline and images), Right (contact methods and details)
+    -->
     <section class="contact section" id="contact">
       <div class="contact__container container grid">
+
+        <!-- LEFT COLUMN: Tagline and decorative images -->
         <div class="contact__data">
+          <!-- Main contact tagline/slogan -->
           <h2 class="contact__title">
             <span>FLAVOR</span> <br>
             THAT <br>
             STAYS IN <br>
             THE MOUTH
           </h2>
+          <!-- Primary contact image -->
           <img src="assets/img/contact-img-1.png" alt="image" class="contact__img-1">
+          <!-- Secondary contact image -->
           <img src="assets/img/contact-img-2.png" alt="image" class="contact__img-2">
 
-
+          <!-- Decorative chicken graphics positioned absolutely -->
           <img src="assets/img/chicken-dam-6.png" alt="image" class="contact__dam-1">
           <img src="assets/img/chicken-dam-4.png" alt="image" class="contact__dam-2">
           <img src="assets/img/chicken-dam-1.png" alt="image" class="contact__dam-3">
           <img src="assets/img/chicken-dam-2.png" alt="image" class="contact__dam-4">
         </div>
         
+        <!-- RIGHT COLUMN: Contact information in 4 grid sections -->
         <div class="contact__info grid">
-            <div>
-              <h3 class="contact__subtitle">Write ot us</h3>
-              <a href="https://api.whatsapp.com/send?phone=51123456789&text=Hello, more information!" target="_blank" class="contact__social-link">
-                <i class="ri-whatsapp-fill"></i>
-              </a>
-              <a href="https://m.me/bedimcode" target="_blank" class="contact__social-link">
-                <i class="ri-messenger-fill"></i>
-              </a>
-              <a href="https://t.me/telegram" target="_blank" class="contact__social-link">
-                <i class="ri-telegram-2-fill"></i>
-              </a>
-            </div>
+          
+          <!-- Contact Method 1: Social messaging -->
+          <div>
+            <h3 class="contact__subtitle">Write to us</h3>
+            <!-- WhatsApp link with icon -->
+            <a href="https://api.whatsapp.com/send?phone=51123456789&text=Hello, more information!" target="_blank" class="contact__social-link">
+              <i class="ri-whatsapp-fill"></i>
+            </a>
+            <!-- Facebook Messenger link with icon -->
+            <a href="https://m.me/bedimcode" target="_blank" class="contact__social-link">
+              <i class="ri-messenger-fill"></i>
+            </a>
+            <!-- Telegram link with icon -->
+            <a href="https://t.me/telegram" target="_blank" class="contact__social-link">
+              <i class="ri-telegram-2-fill"></i>
+            </a>
+          </div>
 
-            <div>
-              <h3 class="contact__subtitle">Delivery</h3>
-              <address class="contact__address">+00-987-654-321 <br>+11-012345</address>
-            </div>
+          <!-- Contact Method 2: Phone numbers for delivery orders -->
+          <div>
+            <h3 class="contact__subtitle">Delivery</h3>
+            <address class="contact__address">+00-987-654-321 <br>+11-012345</address>
+          </div>
 
-            <div>
-              <h3 class="contact__subtitle">Location</h3>
-              <address class="contact__address">Lima - Sun City - Peru <br>
-              Av. Moon #4321
-              </address>
-            </div>
+          <!-- Contact Method 3: Physical location and address -->
+          <div>
+            <h3 class="contact__subtitle">Location</h3>
+            <address class="contact__address">Lima - Sun City - Peru <br>
+            Av. Moon #4321
+            </address>
+          </div>
 
-            <div>
-              <h3 class="contact__subtitle">Attention</h3>
-              <address class="contact__address">Monday to Sunday <br>
-              5pm - 11pm
-              </address>
-            </div>
+          <!-- Contact Method 4: Business operating hours -->
+          <div>
+            <h3 class="contact__subtitle">Attention</h3>
+            <address class="contact__address">Monday to Sunday <br>
+            5pm - 11pm
+            </address>
+          </div>
         </div>
       </div>
     </section>
@@ -302,14 +421,92 @@
 
   </footer>
 
-  <!--========== SCROLL UP ==========-->
-<a href="#" class="scrollup" id="scroll-up">
-  <i class="ri-arrow-up-line"></i>
-</a>
-  <!--=============== SCROLLREVEAL ===============-->
+  <!-- ==================== FOOTER: SITE-WIDE INFORMATION & LINKS ==================== -->
+  <!-- 
+    Footer with company info, social links, payment methods, and email subscription form.
+    Three-column layout for company branding, social/payment, and email signup.
+  -->
+  <footer class="footer">
+    <div class="footer__container container grid">
+      
+      <!-- FOOTER LOGO: Brand identity -->
+      <a href="#" class="footer__logo">
+        <img src="assets/img/logo.svg" alt="image">
+        <span>Fried <br> Chicken</span>
+      </a>
+
+      <!-- FOOTER CONTENT: Main info sections in grid layout -->
+      <div class="footer__content grid">
+
+        <!-- Section 1: Social Media Links -->
+        <div>
+          <h3 class="footer__title">Social</h3>
+          <!-- Social media icon links (opens in new tab) -->
+          <div class="footer__social">
+            <!-- Facebook page link -->
+            <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+              <i class="ri-facebook-circle-fill"></i>
+            </a>
+            <!-- Instagram profile link -->
+            <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+              <i class="ri-instagram-fill"></i>
+            </a>
+            <!-- Twitter/X account link -->
+            <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+              <i class="ri-twitter-x-fill"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Section 2: Accepted Payment Methods -->
+        <div>
+          <h3 class="footer__title">Payment methods</h3>
+          <!-- Images of accepted payment cards (Visa, MasterCard, etc.) -->
+          <div class="footer__pay">
+            <img src="assets/img/footer-card-1.png" alt="image" class="footer__pay-card">
+            <img src="assets/img/footer-card-2.png" alt="image" class="footer__pay-card">
+            <img src="assets/img/footer-card-3.png" alt="image" class="footer__pay-card">
+            <img src="assets/img/footer-card-4.png" alt="image" class="footer__pay-card">
+          </div>
+        </div>
+
+        <!-- Section 3: Email Newsletter Subscription -->
+        <div>
+          <h3 class="footer__title">Subscribe For Offers</h3>
+          <!-- Email signup form -->
+          <form action="" class="footer__form">
+            <!-- Email input field with placeholder -->
+            <input type="email" class="footer__input" placeholder="Email">
+            <!-- Submit button to subscribe to newsletter -->
+            <button type="submit" class="footer__button button">Subscribe</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COPYRIGHT TEXT: Legal attribution -->
+    <span class="footer__copy">
+      &#169; All Rights Reserved By Bedimcode
+    </span>
+
+  </footer>
+
+  <!-- ==================== SCROLL UP BUTTON ==================== -->
+  <!-- 
+    Floating button that appears when user scrolls down.
+    Clicking returns user to top of page smoothly (uses HTML smooth scroll behavior).
+  -->
+  <a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line"></i>
+  </a>
+
+  <!-- ==================== JAVASCRIPT LIBRARIES & SCRIPTS ==================== -->
+  
+  <!-- SCROLLREVEAL LIBRARY: Reveals elements with animation as they enter viewport -->
   <script src="assets/js/scrollreveal.min.js"></script>
 
-  <!-- Main Js -->
+  <!-- MAIN JAVASCRIPT FILE: Handles interactivity (menu toggle, scroll effects, etc.) -->
   <script src="assets/js/main.js"></script>
 </body>
 
