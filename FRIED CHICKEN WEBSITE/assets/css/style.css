@@ -619,13 +619,13 @@ img {
 .contact__img-1 {
   width: 110px;
   top: 1.5rem;
-  right: 4rem;
+  right: -3rem;
 }
 
 .contact__img-2 {
   width: 90px;
   top: 3rem;
-  right: 2rem;
+  right: -6rem;
 }
 
 .contact__dam-1,
@@ -734,6 +734,11 @@ img {
   color: var(--black-color);
   transition: transform 0.4s;
 }
+
+.footer__social i {
+  color: var(--black-color);
+}
+
 .footer__social-link:hover {
   transform: translateY(-0.25rem);
 }
